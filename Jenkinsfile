@@ -34,7 +34,7 @@ pipeline {
                           ]],
                         branches: [ [name: '*/master'] ]
                       ])
-                sh "docker login -u ${params.REGISTRY_USERNAME} -p ${params.REGISTRY_TOKEN} iad.ocir.io"
+                sh "docker login -u ${params.REGISTRY_USERNAME} -p ${params.REGISTRY_TOKEN} lhr.ocir.io"
                 sh "docker tag twitterfeed:${scmVars.GIT_COMMIT} ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}"
                 sh "docker push ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}" 
                 env.GIT_COMMIT = scmVars.GIT_COMMIT
