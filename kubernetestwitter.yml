@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: twitter-feed-v1
   labels:
-    commit: ${GIT_COMMIT}
+    commit: {{GIT_COMMIT}}
 spec:
   replicas: 2
   selector:
@@ -18,16 +18,17 @@ spec:
     spec:
       containers:
       - name: twitter-feed
-        image: iad.ocir.io/cloud_pursuit_west/twitterfeed:${GIT_COMMIT}
+        #image: lhr.ocir.io/cloud_pursuit_west/twitterfeed:${GIT_COMMIT}
+        image: {{DOCKER_REPO}}:{{GIT_COMMIT}}
         imagePullPolicy: Always
         ports:
         - name: twitter-feed
           containerPort: 8080
           protocol: TCP
-        volumeMounts:
-          - name: podinfo
-            mountPath: /tmp
-            readOnly: false
+#        volumeMounts:
+#          - name: podinfo
+#            mountPath: /tmp
+#            readOnly: false
       volumes:
         - name: podinfo
           downwardAPI:
@@ -36,7 +37,7 @@ spec:
               fieldRef:
                 fieldPath: metadata.labels 
       imagePullSecrets:
-        - name: wercker
+        - name: cerpsys-endvi-stage-ocir-secret
 ---
 apiVersion: v1
 kind: Service
@@ -44,7 +45,7 @@ metadata:
   name: twitter-feed
   labels:
     app: twitter-feed
-    commit: ${GIT_COMMIT}
+    commit: {{GIT_COMMIT}}
 spec:
   ports:
   - port: 30000
