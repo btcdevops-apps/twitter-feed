@@ -61,6 +61,7 @@ pipeline {
                         )
                     ENDSSH'
                     '''
+                    sh 'echo "done 1"'
                     sh '''
                         for row in "${replacements[@]}"; do
                             original="$(echo $row | cut -d: -f1)"
@@ -69,6 +70,7 @@ pipeline {
                         done
                     ENDSSH'
                     '''
+                    sh 'echo "done 2"'
                     sh 'sudo kubectl version --client'
                     sh 'ls -l'
                     sh 'kubectl apply -f manifest$ts.yml --server={params.OKE_SERVER_PORT} --token={params.OKE_TOKEN} --insecure-skip-tls-verify=true'
