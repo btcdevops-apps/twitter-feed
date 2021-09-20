@@ -58,7 +58,6 @@ pipeline {
                     sh '''
                         replacements=(
                             {{GIT_COMMIT}}:${GIT_COMMIT}
-                            {{DOCKER_REPO}}:${params.DOCKER_REPO}
                         )
                     ENDSSH'
                     '''
