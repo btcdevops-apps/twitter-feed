@@ -43,12 +43,30 @@ pipeline {
                }
             }
         }
-
-        stage('Deploy to OKE'){
-            steps{
-                script{
+        stage('Deploy to OKE') {
+            steps {
+                script {
+                    def scmVars = checkout([
+                        $class: 'GitSCM',
+                        doGenerateSubmoduleConfigurations: false,
+                        userRemoteConfigs: [[
+                            url: 'https://github.com/btcdevops-apps/twitter-feed.git'
+                          ]],
+                        branches: [ [name: '*/master'] ]
+                      ])
+                    sh 'export ts=$(date +"%Y%m%d%H%M")'
+                    sh 'replacements=({{GIT_COMMIT}}:$GIT_COMMIT) {{DOCKER_REPO}}:${params.DOCKER_REPO})'
+                    sh 'cp kubernetestwitter.yml manifest$ts.yml'
+                    sh '
+                        for row in "${replacements}"; do
+                            original="$(echo $row | cut -d: f1)"
+                            new="$(echo $row | cut -d: -f2)"
+                            sed -i -e "s/${original}/${new}/g" "manifest$ts.yml"
+                        done
+                    '
                     sh 'sudo kubectl version --client'
-                    sh 'kubectl apply -f kuberntes.yml --server={params.OKE_SERVER_PORT} --token={params.OKE_TOKEN} --insecure-skip-tls-verify=true'
+                    sh 'ls -l'
+                    sh 'kubectl apply -f manifest$ts.yml --server={params.OKE_SERVER_PORT} --token={params.OKE_TOKEN} --insecure-skip-tls-verify=true'
                 }
             }
         }
