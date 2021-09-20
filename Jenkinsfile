@@ -57,13 +57,14 @@ pipeline {
                     sh 'export ts=$(date +"%Y%m%d%H%M")'
                     sh 'replacements=({{GIT_COMMIT}}:$GIT_COMMIT) {{DOCKER_REPO}}:${params.DOCKER_REPO})'
                     sh 'cp kubernetestwitter.yml manifest$ts.yml'
-                    sh '
+                    sh '''
                         for row in "${replacements}"; do
                             original="$(echo $row | cut -d: f1)"
                             new="$(echo $row | cut -d: -f2)"
                             sed -i -e "s/${original}/${new}/g" "manifest$ts.yml"
                         done
-                    '
+                    ENDSSH'
+                    '''
                     sh 'sudo kubectl version --client'
                     sh 'ls -l'
                     sh 'kubectl apply -f manifest$ts.yml --server={params.OKE_SERVER_PORT} --token={params.OKE_TOKEN} --insecure-skip-tls-verify=true'
