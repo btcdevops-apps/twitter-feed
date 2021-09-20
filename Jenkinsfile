@@ -57,15 +57,15 @@ pipeline {
                     sh 'cat manifest$ts.yml'
                     sh '''
                         replacements=(
-                            {{GIT_COMMIT}}:$GIT_COMMIT
+                            {{GIT_COMMIT}}:${GIT_COMMIT}
                             {{DOCKER_REPO}}:${params.DOCKER_REPO}
                         )
                     ENDSSH'
                     '''
                     sh '''
-                        for row in "${replacements}"; do
-                            original="$(echo $row | cut -d: f1)"
-                            new="$(echo $row | cut -d: -f2)"
+                        for row in "${replacements[@]}"; do
+                            original="$(echo $row | cut -d: -f1)";
+                            new="$(echo $row | cut -d: -f2)";
                             sed -i -e "s/${original}/${new}/g" "manifest$ts.yml"
                         done
                     ENDSSH'
