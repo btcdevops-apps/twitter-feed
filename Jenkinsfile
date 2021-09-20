@@ -53,8 +53,9 @@ pipeline {
                         branches: [ [name: '*/master'] ]
                       ])
                     sh 'export ts=$(date +"%Y%m%d%H%M")'
-                    sh 'replacements=({{GIT_COMMIT}}:$GIT_COMMIT) {{DOCKER_REPO}}:${params.DOCKER_REPO})'
                     sh 'cp kubernetestwitter.yml manifest$ts.yml'
+                    sh 'cat manifest$ts.yml'
+                    sh 'replacements=({{GIT_COMMIT}}:$GIT_COMMIT) {{DOCKER_REPO}}:${params.DOCKER_REPO})'
                     sh '''
                         for row in "${replacements}"; do
                             original="$(echo $row | cut -d: f1)"
