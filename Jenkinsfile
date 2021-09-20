@@ -64,8 +64,8 @@ pipeline {
                     '''
                     sh '''
                         for row in "${replacements[@]}"; do
-                            original="$(echo $row | cut -d: -f1)";
-                            new="$(echo $row | cut -d: -f2)";
+                            original="$(echo $row | cut -d: -f1)"
+                            new="$(echo $row | cut -d: -f2)"
                             sed -i -e "s/${original}/${new}/g" "manifest$ts.yml"
                         done
                     ENDSSH'
