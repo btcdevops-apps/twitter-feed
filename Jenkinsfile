@@ -55,12 +55,7 @@ pipeline {
                     sh 'export ts=$(date +"%Y%m%d%H%M")'
                     sh 'cp kubernetestwitter.yml manifest$ts.yml'
                     sh 'cat manifest$ts.yml'
-                    sh '''
-                        replacements=(
-                            {{GIT_COMMIT}}:${GIT_COMMIT}
-                        )
-                    ENDSSH'
-                    '''
+                    sh 'replacements=({{GIT_COMMIT}}:${GIT_COMMIT} {{DOCKER_REPO}}:${params.DOCKER_REPO})'
                     sh 'echo "done 1"'
                     sh '''
                         for row in "${replacements[@]}"; do
