@@ -2,7 +2,6 @@ pipeline {
     agent any
     
     stages {
-        
         stage('Build') { 
             steps {
                 sh "mvn install -DskipTests" 
@@ -40,7 +39,6 @@ pipeline {
                 env.GIT_COMMIT = scmVars.GIT_COMMIT
                 sh "export GIT_COMMIT=${env.GIT_COMMIT}"
                 }
-               }
             }
         }
         stage('Deploy to OKE') {
@@ -54,7 +52,7 @@ pipeline {
                           ]],
                         branches: [ [name: '*/master'] ]
                       ])
-                    sh 'export ts=$(date +"%Y%m%d%H%M")'
+                    sh "export ts=$(date +'%Y%m%d%H%M')"
                     sh 'replacements=({{GIT_COMMIT}}:$GIT_COMMIT) {{DOCKER_REPO}}:${params.DOCKER_REPO})'
                     sh 'cp kubernetestwitter.yml manifest$ts.yml'
                     sh '''
@@ -71,4 +69,5 @@ pipeline {
                 }
             }
         }
+    }
 }
