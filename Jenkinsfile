@@ -54,14 +54,14 @@ pipeline {
                         branches: [ [name: '*/master'] ]
                       ])
                     sh 'export ts=$(date +"%Y%m%d%H%M")'
-                    sh 'cp kubernetestwitter.yml manifest$ts.yml'
-                    sh 'cat manifest$ts.yml'
+                    sh 'cp kubernetestwitter.yml manifest$ts.yml'                    
                     sh "export DOCKER_REPOS=${params.DOCKER_REPO}"
                     echo "repos = ${DOCKER_REPOS}"
                     //sh 'replacements=({{GIT_COMMIT}}:${GIT_COMMIT} {{DOCKER_REPO}}:${params.DOCKER_REPO})'
                     sh 'echo "done 1"'
                     sh 'sed -i -e "s/[GITCOMMIT]/${GIT_COMMIT}/g" "manifest$ts.yml"'
                     sh 'sed -i -e "s/[DOCKER_REPO]/${DOCKER_REPOS}/g" "manifest$ts.yml"'
+                    sh 'cat manifest$ts.yml'
                     // sh '''
                        
                     //     for row in "${replacements[@]}"; do
@@ -73,9 +73,9 @@ pipeline {
                     // ENDSSH'
                     // '''
                     sh 'echo "done 2"'
-                    sh 'sudo kubectl version --client'
+                    sh 'kubectl version --client'
                     sh 'ls -l'
-                    sh 'kubectl apply -f manifest$ts.yml --server={params.OKE_SERVER_PORT} --token={params.OKE_TOKEN} --insecure-skip-tls-verify=true'
+                    sh 'kubectl apply -f manifest$ts.yml --server=${params.OKE_SERVER_PORT} --token=${params.OKE_TOKEN} --insecure-skip-tls-verify=true'
                 }
             }
         }
