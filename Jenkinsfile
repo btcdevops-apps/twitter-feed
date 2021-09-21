@@ -56,7 +56,7 @@ pipeline {
                     sh 'export ts=$(date +"%Y%m%d%H%M")'
                     sh 'cp kubernetestwitter.yml manifest$ts.yml'                    
                     sh "export DOCKER_REPOS=${params.DOCKER_REPO}"
-                    sh "export OKE_SERVER=${params.OKE_SERVER_PORT}"
+                    sh "export OKE_SERVERZ=${params.OKE_SERVER_PORT}"
                     sh "export OKE_TOKEN=${params.OKE_TOKEN}"
                     //echo "repos = $DOCKER_REPOS"
                     //sh 'replacements=({{GIT_COMMIT}}:${GIT_COMMIT} {{DOCKER_REPO}}:${params.DOCKER_REPO})'
@@ -77,7 +77,7 @@ pipeline {
                     sh 'echo "done 2"'
                     sh 'kubectl version --client'
                     sh 'ls -l'
-                    sh 'kubectl apply -f manifest$ts.yml --server=$OKE_SERVER --token=$OKE_TOKEN --insecure-skip-tls-verify=true'
+                    sh 'kubectl apply -f manifest$ts.yml --server=$OKE_SERVERZ --token=$OKE_TOKEN --insecure-skip-tls-verify=true'
                 }
             }
         }
