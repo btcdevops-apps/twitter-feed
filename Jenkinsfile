@@ -77,7 +77,7 @@ pipeline {
                     sh 'echo "done 2"'
                     sh 'kubectl version --client'
                     sh 'ls -l'
-                    sh "kubectl apply -f manifest$ts.yml --server=$OKE_SERVERZ --token=$OKE_TOKEN --insecure-skip-tls-verify=true"
+                    sh 'kubectl apply -f manifest$ts.yml --server=$OKE_SERVERZ --token=$OKE_TOKEN --insecure-skip-tls-verify=true'
                 }
             }
         }
