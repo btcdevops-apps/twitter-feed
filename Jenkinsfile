@@ -57,8 +57,8 @@ pipeline {
                     sh 'cat manifest$ts.yml'
                     //sh 'replacements=({{GIT_COMMIT}}:${GIT_COMMIT} {{DOCKER_REPO}}:${params.DOCKER_REPO})'
                     sh 'echo "done 1"'
-                    sh 'sed -i -e "s/{{GIT_COMMIT}}/${GIT_COMMIT}" "manifest$ts.yml"'
-                    sh 'sed -i -e "s/{{DOCKER_REPO}}/${params.DOCKER_REPO}" "manifest$ts.yml"'
+                    sh 'sed -i "s/{{GIT_COMMIT}}/${GIT_COMMIT}" "manifest$ts.yml"'
+                    sh 'sed -i "s/{{DOCKER_REPO}}/${params.DOCKER_REPO}" "manifest$ts.yml"'
                     // sh '''
                        
                     //     for row in "${replacements[@]}"; do
