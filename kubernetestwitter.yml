@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: twitter-feed-v1
   labels:
-    commit: {{GIT_COMMIT}}
+    commit: ${GITCOMMIT}
 spec:
   replicas: 2
   selector:
@@ -13,13 +13,13 @@ spec:
     metadata:
       labels:
         app: twitter-feed
-        commit: ${GIT_COMMIT}
+        commit: ${GITCOMMIT}
         color: blue
     spec:
       containers:
       - name: twitter-feed
-        #image: lhr.ocir.io/cloud_pursuit_west/twitterfeed:${GIT_COMMIT}
-        image: {{DOCKER_REPO}}:{{GIT_COMMIT}}
+        #image: lhr.ocir.io/cloud_pursuit_west/twitterfeed:${GITCOMMIT}
+        image: ${DOCKER_REPO}:${GITCOMMIT}
         imagePullPolicy: Always
         ports:
         - name: twitter-feed
@@ -45,7 +45,7 @@ metadata:
   name: twitter-feed
   labels:
     app: twitter-feed
-    commit: {{GIT_COMMIT}}
+    commit: ${GITCOMMIT}
 spec:
   ports:
   - port: 30000
