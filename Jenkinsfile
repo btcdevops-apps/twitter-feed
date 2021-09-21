@@ -38,6 +38,7 @@ pipeline {
                 sh "docker push ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}" 
                 env.GIT_COMMIT = scmVars.GIT_COMMIT
                 sh "export GIT_COMMIT=${env.GIT_COMMIT}"
+                sh "export DOCKER_REPOS=${params.DOCKER_REPO}"
                 }
             }
         }
@@ -58,7 +59,7 @@ pipeline {
                     //sh 'replacements=({{GIT_COMMIT}}:${GIT_COMMIT} {{DOCKER_REPO}}:${params.DOCKER_REPO})'
                     sh 'echo "done 1"'
                     sh 'sed -i -e "s/[GITCOMMIT]/${GIT_COMMIT}/g" "manifest$ts.yml"'
-                    sh 'sed -i -e "s/[DOCKER_REPO]/${params.DOCKER_REPO}/g" "manifest$ts.yml"'
+                    sh 'sed -i -e "s/[DOCKER_REPO]/${DOCKER_REPOS}/g" "manifest$ts.yml"'
                     // sh '''
                        
                     //     for row in "${replacements[@]}"; do
