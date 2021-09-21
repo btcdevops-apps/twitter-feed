@@ -56,7 +56,7 @@ pipeline {
                     sh 'export ts=$(date +"%Y%m%d%H%M")'
                     sh 'cp kubernetestwitter.yml manifest$ts.yml'                    
                     sh "export DOCKER_REPOS=${params.DOCKER_REPO}"
-                    echo "repos = ${DOCKER_REPOS}"
+                    echo "repos = $DOCKER_REPOS"
                     //sh 'replacements=({{GIT_COMMIT}}:${GIT_COMMIT} {{DOCKER_REPO}}:${params.DOCKER_REPO})'
                     sh 'echo "done 1"'
                     sh 'sed -i -e "s/[GITCOMMIT]/${GIT_COMMIT}/g" "manifest$ts.yml"'
