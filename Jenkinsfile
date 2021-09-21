@@ -55,16 +55,20 @@ pipeline {
                     sh 'export ts=$(date +"%Y%m%d%H%M")'
                     sh 'cp kubernetestwitter.yml manifest$ts.yml'
                     sh 'cat manifest$ts.yml'
-                    sh 'replacements=({{GIT_COMMIT}}:${GIT_COMMIT} {{DOCKER_REPO}}:${params.DOCKER_REPO})'
+                    //sh 'replacements=({{GIT_COMMIT}}:${GIT_COMMIT} {{DOCKER_REPO}}:${params.DOCKER_REPO})'
                     sh 'echo "done 1"'
-                    sh '''
-                        for row in "${replacements[@]}"; do
-                            original="$(echo $row | cut -d: -f1)"
-                            new="$(echo $row | cut -d: -f2)"
-                            sed -i -e "s/${original}/${new}/g" "manifest$ts.yml"
-                        done
-                    ENDSSH'
-                    '''
+                    sh 'sed -i -e "s/{{GIT_COMMIT}}/${GIT_COMMIT}" "manifest$ts.yml"'
+                    sh 'sed -i -e "s/{{DOCKER_REPO}}/${params.DOCKER_REPO}" "manifest$ts.yml"'
+                    // sh '''
+                       
+                    //     for row in "${replacements[@]}"; do
+                    //         original="$(echo $row | cut -d: -f1)"
+                    //         new="$(echo $row | cut -d: -f2)"
+                    //         echo "new = ${new}"
+                    //         sed -i -e "s/${original}/${new}/g" "manifest$ts.yml"
+                    //     done
+                    // ENDSSH'
+                    // '''
                     sh 'echo "done 2"'
                     sh 'sudo kubectl version --client'
                     sh 'ls -l'
