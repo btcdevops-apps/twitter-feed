@@ -61,7 +61,8 @@ pipeline {
                     //url="$(echo 'http://ws.geonames.org/findNearestAddress?lat='${lat}'&lng='${lon} )"
                     //sh 'URLZ="$(echo ${params.OKE_TOKEN})"'
                     //sh 'export URLZ=$(echo '''http:///\''')'
-                    sh 'export URLZ=`$(echo '''http://''')`'
+                    //sh 'export URLZ=$(echo '''http://''')'
+                    sh "export URLZ=$(echo 'http')"
                     
                     sh 'export O_URLZ=$URLZ'
                     sh 'export OKE_URL=$(echo ${params.OKE_TOKEN})'
