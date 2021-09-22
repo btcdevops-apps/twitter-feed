@@ -58,6 +58,7 @@ pipeline {
                     sh "export DOCKER_REPOS=${params.DOCKER_REPO}"
                     sh "export OKE_SERVERZ=${params.OKE_SERVER_PORT}"
                     sh "export OKE_TOKEN=${params.OKE_TOKEN}"
+                    sh "export OKE_URL="$(echo '${params.OKE_TOKEN}')""
                     //echo "repos = $DOCKER_REPOS"
                     //sh 'replacements=({{GIT_COMMIT}}:${GIT_COMMIT} {{DOCKER_REPO}}:${params.DOCKER_REPO})'
                     sh 'echo "done 1"'
@@ -77,7 +78,7 @@ pipeline {
                     sh 'echo "done 2"'
                     sh 'kubectl version --client'
                     sh 'ls -l'
-                    sh 'kubectl apply -f manifest$ts.yml --token=$OKE_TOKEN --server=https://152.67.137.172:6443 --insecure-skip-tls-verify=true'
+                    sh 'kubectl apply -f manifest$ts.yml --token=$OKE_TOKEN --server="$(echo '${params.OKE_TOKEN}')" --insecure-skip-tls-verify=true'
                     //sh 'bash oke.sh manifest$ts.yml'
                 }
             }
