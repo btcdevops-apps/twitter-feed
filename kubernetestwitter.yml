@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: twitter-feed
-        image: lhr.ocir.io/lrnylyee1t24/twitterfeed:${GIT_COMMIT}
+        image: lhr.ocir.io/lrnylyee1t24/twitter-app:${GIT_COMMIT}
         imagePullPolicy: Always
         ports:
         - name: twitter-feed
