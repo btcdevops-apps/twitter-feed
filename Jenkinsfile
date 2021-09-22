@@ -73,7 +73,7 @@ pipeline {
                     //sh "export OKE_TOKEN=${params.OKE_TOKEN}"                   
                     //echo "repos = $DOCKER_REPOS"
                     //sh 'replacements=({{GIT_COMMIT}}:${GIT_COMMIT} {{DOCKER_REPO}}:${params.DOCKER_REPO})'
-                    sh 'echo "done 1"'
+                    sh 'echo "$PWD"'
                     sh 'sed -i -e "s/[GITCOMMIT]/${GIT_COMMIT}/g" "manifest$ts.yml"'
                     sh 'sed -i -e "s/[DOCKER_REPO]/$DOCKER_REPOS/g" "manifest$ts.yml"'
                     sh 'cat manifest$ts.yml'
