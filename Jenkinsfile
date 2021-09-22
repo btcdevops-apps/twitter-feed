@@ -62,7 +62,8 @@ pipeline {
                     //sh 'URLZ="$(echo ${params.OKE_TOKEN})"'
                     //sh 'export URLZ=$(echo '''http:///\''')'
                     //sh 'export URLZ=$(echo '''http://''')'
-                    sh "export URLZ=$(echo '''cc')"
+                    URLZ=$(echo 'cc')
+                    echo " $URLZ"
                     
                     sh 'export O_URLZ=$URLZ'
                     sh 'export OKE_URL=$(echo ${params.OKE_TOKEN})'
