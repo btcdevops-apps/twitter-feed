@@ -76,7 +76,7 @@ pipeline {
                     sh 'echo "$PWD"'
                     sh 'sed -i -e "s/[GITCOMMIT]/${GIT_COMMIT}/g" "manifest$ts.yml"'
                     sh 'sed -i -e "s/[DOCKER_REPO]/$DOCKER_REPOS/g" "manifest$ts.yml"'
-                    sh 'cat manifest$ts.yml'
+                    // sh 'cat manifest$ts.yml'
                     // sh '''
                        
                     //     for row in "${replacements[@]}"; do
@@ -89,9 +89,9 @@ pipeline {
                     // '''
                     sh 'echo "done 2"'
                     sh 'kubectl version --client'
+                    sh 'kubectl apply -f manifest$ts.yml'
                     sh 'ls -l'
                     //sh 'kubectl apply -f manifest$ts.yml --token=$OKE_TOKEN --server=$O_URLZ --insecure-skip-tls-verify=true'
-                    sh 'kubectl apply -f manifest$ts.yml'
                     //sh 'bash oke.sh manifest$ts.yml'
                 }
             }
