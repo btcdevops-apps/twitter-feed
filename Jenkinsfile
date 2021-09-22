@@ -54,7 +54,7 @@ pipeline {
                         branches: [ [name: '*/master'] ]
                       ])
                     sh 'export ts=$(date +"%Y%m%d%H%M")'
-                    sh 'cp kubernetestwitter.yml manifest$ts.yml'                    
+                    sh 'cp kubernetestwitter.yml manifest_stage.yml'                    
                     sh "export DOCKER_REPOS=${params.DOCKER_REPO}"
                     sh "export OKE_SERVERZ=${params.OKE_SERVER_PORT}"
                     
@@ -74,8 +74,8 @@ pipeline {
                     //echo "repos = $DOCKER_REPOS"
                     //sh 'replacements=({{GIT_COMMIT}}:${GIT_COMMIT} {{DOCKER_REPO}}:${params.DOCKER_REPO})'
                     sh 'echo "$PWD"'
-                    sh 'sed -i -e "s/[GITCOMMIT]/${GIT_COMMIT}/g" "manifest$ts.yml"'
-                    sh 'sed -i -e "s/[DOCKER_REPO]/$DOCKER_REPOS/g" "manifest$ts.yml"'
+                    sh 'sed -i -e "s/[GITCOMMIT]/${GIT_COMMIT}/g" "manifest_stage.yml"'
+                    sh 'sed -i -e "s/[DOCKER_REPO]/$DOCKER_REPOS/g" "manifest_stage.yml"'
                     // sh 'cat manifest$ts.yml'
                     // sh '''
                        
