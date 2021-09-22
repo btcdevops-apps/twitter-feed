@@ -68,7 +68,7 @@ pipeline {
                     //sh 'export O_URLZ=$URLZ$OKE_SERVERZ'
                     sh '''#!/bin/bash
                         echo "I'm in BASH mode"
-                        echo "$OKE_SERVERZ"
+                        echo "${OKE_SERVERZ}"
                         echo "${params.OKE_SERVER_PORT}"
                     '''
                     
