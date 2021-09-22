@@ -62,9 +62,14 @@ pipeline {
                     //sh 'URLZ="$(echo ${params.OKE_TOKEN})"'
                     //sh 'export URLZ=$(echo '''http:///\''')'
                     //sh 'export URLZ=$(echo '''http://''')'
-                    URLZ="https://"
-                    echo " $URLZ"
-                    sh 'export O_URLZ=$URLZ$OKE_SERVERZ'
+                    
+                    //URLZ="https://"
+                    //echo " $URLZ"
+                    //sh 'export O_URLZ=$URLZ$OKE_SERVERZ'
+                    sh '''#!/bin/bash
+                        echo "I'm in BASH mode"
+                        echo $OKE_SERVERZ
+                    '''
                     
                     //sh 'export O_URLZ=$URLZ'
                     sh 'export OKE_URL=$(echo ${params.OKE_TOKEN})'
