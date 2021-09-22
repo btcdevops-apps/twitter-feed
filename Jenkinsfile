@@ -66,11 +66,11 @@ pipeline {
                     //URLZ="https://"
                     //echo " $URLZ"
                     //sh 'export O_URLZ=$URLZ$OKE_SERVERZ'
-                    sh 'echo $params.OKE_SERVER_PORT'
+                    //sh 'echo $params.OKE_SERVER_PORT'
                     
                     //sh 'export O_URLZ=$URLZ'
-                    sh 'export OKE_URL=$(echo ${params.OKE_TOKEN})'
-                    sh "export OKE_TOKEN=${params.OKE_TOKEN}"                   
+                    //sh 'export OKE_URL=$(echo ${params.OKE_TOKEN})'
+                    //sh "export OKE_TOKEN=${params.OKE_TOKEN}"                   
                     //echo "repos = $DOCKER_REPOS"
                     //sh 'replacements=({{GIT_COMMIT}}:${GIT_COMMIT} {{DOCKER_REPO}}:${params.DOCKER_REPO})'
                     sh 'echo "done 1"'
@@ -90,7 +90,8 @@ pipeline {
                     sh 'echo "done 2"'
                     sh 'kubectl version --client'
                     sh 'ls -l'
-                    sh 'kubectl apply -f manifest$ts.yml --token=$OKE_TOKEN --server=$O_URLZ --insecure-skip-tls-verify=true'
+                    //sh 'kubectl apply -f manifest$ts.yml --token=$OKE_TOKEN --server=$O_URLZ --insecure-skip-tls-verify=true'
+                    sh 'kubectl apply -f manifest$ts.yml --insecure-skip-tls-verify=true'
                     //sh 'bash oke.sh manifest$ts.yml'
                 }
             }
