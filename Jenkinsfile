@@ -88,9 +88,10 @@ pipeline {
                     // ENDSSH'
                     // '''
                     sh 'echo "done 2"'
-                    sh 'kubectl version --client'
-                    sh 'kubectl apply -f manifest$ts.yml'
-                    sh 'ls -l'
+                    
+                    //sh 'kubectl version --client'
+                    //sh 'kubectl apply -f manifest$ts.yml'
+                    //sh 'ls -l'
                     //sh 'kubectl apply -f manifest$ts.yml --token=$OKE_TOKEN --server=$O_URLZ --insecure-skip-tls-verify=true'
                     //sh 'bash oke.sh manifest$ts.yml'
                 }
